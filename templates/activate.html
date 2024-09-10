@@ -1,0 +1,8 @@
+<!-- used to send email in this format-->
+{% autoescape off %}
+
+Hi 
+Please Click on This Link below to verify your account
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}
