@@ -91,9 +91,7 @@
 
   if(localStorage.getItem('cart') == null){
     var cart = {};
-  }
-
-  else{
+  }else{
     cart = JSON.parse(localStorage.getItem('cart'));                     //accseing local storage
     updateCart(cart);
   }
@@ -179,7 +177,7 @@
   function updateCart(cart) {
     console.log(cart);
     for(var item in cart){
-      document.getElementById('div'+ item).innerHTML = "<button id='minus" +item + "'class='btn btn-success minus'> - </button> <span id='valpr" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item +"'class='btn btn-success plus'> + </button>";
+      document.getElementById('div'+ item).innerHTML = "<button id='minus" + item + "'class='btn btn-success minus'> - </button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item +"'class='btn btn-success plus'> + </button>";
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));                  //stroing local  strorage as a string
