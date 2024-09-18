@@ -40,6 +40,11 @@ def contact(request):
 
 
 
+def productview(request, id):
+    #we are getting product by using id 
+    product = Product.objects.filter(id = id)
+    return render(request,"productview.html",{'product':product[0]})
+
 
 def about(request):
     return render(request,"about.html")

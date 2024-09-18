@@ -9,6 +9,6 @@ urlpatterns = [
     path('checkout',views.checkout),
     path('tracker',views.tracker),
     path('demoo',views.demoo),
-
+    path('media/<int:id>',views.productview),   #getting product by using  id 
 
 ]
