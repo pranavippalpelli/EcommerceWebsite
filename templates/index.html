@@ -111,8 +111,9 @@
     else{
       qty = 1;                                                      //if id is null then create cartlistqty,name,price
       name = document.getElementById('name' + idstr).innerHTML;
+      price = document.getElementById('price' + idstr).innerHTML;
       //price = document.getElementById('price' + idstr).innerHTML; 
-      cart[idstr] = [qty, name];
+      cart[idstr] = [qty, name , parseInt(price)];
     }
   
     updateCart(cart);
