@@ -1,7 +1,5 @@
 # Shopcart
-Developed Wanderlust, a travel blog website allowing users to view and add travel
-posts with descriptions and images. Includes features such as review submission and
-interactive navigation for an engaging user experience.
+Developed a fully functional Responsive e-commerce website with features including product listings, add-to-cart functionality, user authentication with email verification, order placement, and order tracking.
 # website view
 https://github.com/user-attachments/assets/6f354cde-42c4-467e-a92e-cdb5122b410f
 # Signup and Login of user with Email verification
