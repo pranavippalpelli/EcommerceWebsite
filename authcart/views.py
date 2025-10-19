@@ -101,6 +101,7 @@
 #     return redirect('/auth/login')
 
 
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -113,6 +114,10 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from .utils import TokenGenerator, generate_token
 import os
+
+
+
+
 # Signup view
 def signup(request):
     if request.method == "POST":
@@ -141,7 +146,7 @@ def signup(request):
         })
 
         try:
-            email_message = EmailMessage(email_subject, message, settings.EMAIL_HOST_USER, [email])
+            email_message = EmailMessage(email_subject, message, os.getenv('EMAIL_HOST_USER'), [email])
             email_message.send()
             messages.success(request, "Activate your account via email link")
         except Exception as e:
@@ -152,6 +157,9 @@ def signup(request):
         return redirect('/auth/login')
 
     return render(request, "signup.html")
+
+
+
 
 
 # Activate Account View
@@ -173,6 +181,9 @@ class ActivateAccountView(View):
         return render(request, 'activatefail.html')
 
 
+
+
+
 # Login
 def handlelogin(request):
     if request.method == "POST":
@@ -191,8 +202,15 @@ def handlelogin(request):
     return render(request, "login.html")
 
 
+
+
+
+
 # Logout
 def handlelogout(request):
     logout(request)
     messages.info(request, "Logged out successfully")
     return redirect('/auth/login')
+
+
+
