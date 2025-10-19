@@ -1,0 +1,13 @@
+services:
+  - type: web                     # It’s a web service (HTTP)
+    name: django-app              # Name of your app on Render (you can change it)
+    env: python                   # Use Python environment
+    buildCommand: |               # Commands to run while building
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn ecommerce.wsgi   # Command to start the app
+    envVars:                     # Environment variables
+      - key: DJANGO_SETTINGS_MODULE
+        value: ecommerce.settings
+      - key: PYTHON_VERSION
+        value: 3.11

@@ -1,0 +1,24 @@
+.logo{
+    font-weight: 40px;
+    font-size: 30px;
+    color: white;
+}
+.navbar-nav > li{
+    margin-left:5px;
+    margin-right:5px;
+}
+.homeimg{
+    width: 100%;
+    height: 95vh;
+    
+    
+}
+.homeexclusiveword{
+    font-size: 30px;
+}
+.homecontent{
+    font-family: sans-serif;
+    margin-top: 15%;
+    margin-left: 10%;
+    color: white;
+} 
