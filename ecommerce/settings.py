@@ -175,7 +175,9 @@ from dotenv import load_dotenv
 load_dotenv()  # lo
 
 # Secret key
-SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+ALLOWED_HOSTS = ["*", ".onrender.com"]
 
 # Debug
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
@@ -183,8 +185,10 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 # Gmail SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
+# EMAIL_PORT = 465
+EMAIL_PORT = 587
+# EMAIL_USE_SSL = True
+EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
@@ -192,7 +196,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -256,10 +260,10 @@ USE_I18N = True
 USE_TZ = True
 
 # Email configuration (use Gmail App Password)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 465
+# EMAIL_USE_SSL = True
 
 
 # Static & Media
