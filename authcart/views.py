@@ -112,7 +112,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from .utils import TokenGenerator, generate_token
-
+import os
 # Signup view
 def signup(request):
     if request.method == "POST":
@@ -135,7 +135,7 @@ def signup(request):
         email_subject = "Activate Your Account"
         message = render_to_string('activate.html', {
             'user': user,
-            'domain': '127.0.0.1:8000',  # Replace with deployed domain
+            'domain': os.getenv('WEBSITEPATH'),  # Replace with deployed domain
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': generate_token.make_token(user)
         })
