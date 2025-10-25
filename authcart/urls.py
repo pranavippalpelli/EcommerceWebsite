@@ -5,6 +5,7 @@ urlpatterns = [
     path('signup/',views.signup),
     path('login/',views.handlelogin),
     path('logout/',views.handlelogout),
-    path('activate/<uidb64>/<token>',views.ActivateAccountView.as_view(),name='activate'),
+    #for email verification
+    # path('activate/<uidb64>/<token>',views.ActivateAccountView.as_view(),name='activate'),
 
 ]
