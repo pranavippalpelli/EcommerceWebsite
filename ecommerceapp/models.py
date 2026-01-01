@@ -5,6 +5,10 @@ from django.db import models
 # Create your models here.
 #write code here and after saving write two commands:-> python manage.py makemigrations , python manage.py migrate
 #register model in admin.py
+
+
+
+
 class Contact(models.Model):
     name = models.CharField(max_length=50)
     email =models.EmailField()
@@ -16,7 +20,6 @@ class Contact(models.Model):
     
 
 
-
 class Product(models.Model):
     product_id = models.AutoField
     product_name = models.CharField(max_length=50)
@@ -25,7 +28,7 @@ class Product(models.Model):
     price = models.IntegerField(default = 0)
     desc = models.CharField(max_length=300)
     # image = models.ImageField(upload_to='images/images')
-    image = models.CharField(max_length=100)
+    image = models.CharField(max_length=500)
     
 
     def __str__(self):

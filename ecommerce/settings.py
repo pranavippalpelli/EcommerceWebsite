@@ -15,6 +15,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Debug
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
+# DEBUG = True
 
 # Gmail SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -40,10 +40,17 @@ def contact(request):
 
 
 
+# def productview(request, id):
+#     #we are getting product by using id 
+#     product = Product.objects.filter(id = id)
+#     return render(request,"productview.html",{'product':product[0]})
+
+from django.shortcuts import get_object_or_404
+
 def productview(request, id):
-    #we are getting product by using id 
-    product = Product.objects.filter(id = id)
-    return render(request,"productview.html",{'product':product[0]})
+    product = get_object_or_404(Product, id=id)
+    return render(request, "productview.html", {'product': product})
+
 
 
 def about(request):
@@ -79,28 +86,90 @@ def tracker(request):
 
 
 
+# def checkout(request):
+#     if request.method == "POST":
+#         items_json = request.POST.get("itemsjson")
+#         name = request.POST.get("name")
+#         email = request.POST.get("email")
+#         address = request.POST.get("address1")+" "+request.POST.get("address2")
+#         city = request.POST.get("city")
+#         state = request.POST.get("state")
+#         zip_code = request.POST.get("zip")
+#         phoneno = request.POST.get("phoneno")
+#         #creating object of class contact
+#         order=Orders(items_json=items_json,name=name,email=email,address=address,city=city,state=state,zip_code=zip_code,phone=phoneno)
+#         order.save()
+
+#         update = OrderUpdate(order_id = order.order_id , update_desc = "this order is placed")
+#         update.save()
+
+
+#         thank = True
+#         id = order.order_id
+#         return render(request,"checkout.html",{'thank':thank , 'id':id})
+#     return render(request,"checkout.html")
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages  # optional for flash messages
+from .models import Orders, OrderUpdate
+import json
+
 def checkout(request):
+    # Check if user is logged in
+    if not request.user.is_authenticated:
+        messages.error(request, "You must login first to place an order.")
+        return redirect(f"/auth/login/?next=/checkout")
+
     if request.method == "POST":
         items_json = request.POST.get("itemsjson")
+
+        # Check if cart is empty
+        try:
+            items_dict = json.loads(items_json)
+        except:
+            items_dict = {}
+
+        # if not items_dict or len(items_dict) < 1:
+        #     messages.error(request, "Your cart is empty. Add items before placing an order.")
+        #     return redirect("/checkout")
+
+        if not items_dict or len(items_dict) < 1:
+            return render(request, "checkout.html", {
+                'error': "Your cart is empty. Add items before placing an order."
+            })
+
+        # Get form data
         name = request.POST.get("name")
         email = request.POST.get("email")
-        address = request.POST.get("address1")+" "+request.POST.get("address2")
+        address = request.POST.get("address1") + " " + request.POST.get("address2")
         city = request.POST.get("city")
         state = request.POST.get("state")
         zip_code = request.POST.get("zip")
         phoneno = request.POST.get("phoneno")
-        #creating object of class contact
-        order=Orders(items_json=items_json,name=name,email=email,address=address,city=city,state=state,zip_code=zip_code,phone=phoneno)
+
+        # Create Order
+        order = Orders(
+            items_json=items_json,
+            name=name,
+            email=email,
+            address=address,
+            city=city,
+            state=state,
+            zip_code=zip_code,
+            phone=phoneno
+        )
         order.save()
 
-        update = OrderUpdate(order_id = order.order_id , update_desc = "this order is placed")
+        # Create Order Update
+        update = OrderUpdate(order_id=order.order_id, update_desc="This order is placed")
         update.save()
-
 
         thank = True
         id = order.order_id
-        return render(request,"checkout.html",{'thank':thank , 'id':id})
-    return render(request,"checkout.html")
+        return render(request, "checkout.html", {'thank': thank, 'id': id})
+
+    return render(request, "checkout.html")
 
 
 # Create your views here.
